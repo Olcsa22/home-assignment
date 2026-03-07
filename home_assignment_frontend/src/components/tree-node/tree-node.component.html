@@ -1,0 +1,44 @@
+<div class="tree-node" [style.paddingLeft.px]="level * 20">
+  <div 
+    class="node-content"
+    [class.selected]="isSelected"
+    [class.filtered-out]="hasFilter && !matchesFilter"
+    [class.drop-target]="isDropTarget"
+    cdkDropList
+    [id]="dropListId"
+    [cdkDropListData]="node"
+    [cdkDropListConnectedTo]="connectedDropLists"
+    (cdkDropListDropped)="onDrop($event)"
+    (cdkDropListEntered)="onDragEnter()"
+    (cdkDropListExited)="onDragExit()"
+    (click)="onSelect()">
+    
+    @if (node.children && node.children.length > 0) {
+      <button class="expand-btn" (click)="toggleExpand($event)">
+        {{ isExpanded ? '▼' : '▶' }}
+      </button>
+    } @else {
+      <span class="expand-placeholder"></span>
+    }
+    
+    <span class="node-icon">{{ node.isRoot ? '🌳' : '🍃' }}</span>
+    <span class="node-name" cdkDrag [cdkDragData]="node">
+      {{ node.name }}
+      <div class="drag-placeholder" *cdkDragPlaceholder></div>
+    </span>
+  </div>
+
+  @if (isExpanded && node.children && node.children.length > 0) {
+    <div class="children-container">
+      @for (child of node.children; track child.id) {
+        <app-tree-node
+          [node]="child"
+          [level]="level + 1"
+          [dropListIds]="dropListIds"
+          (nodeSelected)="onChildSelected($event)"
+          (nodeDrop)="onChildDrop($event)">
+        </app-tree-node>
+      }
+    </div>
+  }
+</div>

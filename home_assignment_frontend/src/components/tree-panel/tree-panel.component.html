@@ -1,0 +1,29 @@
+<div class="tree-panel">
+  <div class="filter-section">
+    <input 
+      type="text"
+      class="filter-input"
+      placeholder="🔍 Filter tree..."
+      [value]="filterValue()"
+      (input)="onFilterInput($event)">
+  </div>
+  
+  <div class="tree-container" (click)="onTreeContainerClick($event)">
+    @if (!isEmpty) {
+      @for (root of treeData(); track root.id) {
+        <app-tree-node
+          [node]="root"
+          [level]="0"
+          [dropListIds]="dropListIds()"
+          (nodeSelected)="onNodeSelected($event)">
+        </app-tree-node>
+      }
+    } @else {
+      <div class="empty-state">
+        <div class="empty-icon">🌳</div>
+        <p>No nodes yet</p>
+        <p class="hint">Click "New" to create your first node</p>
+      </div>
+    }
+  </div>
+</div>

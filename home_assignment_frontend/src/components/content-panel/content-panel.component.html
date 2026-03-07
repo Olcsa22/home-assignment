@@ -1,0 +1,22 @@
+<div class="content-panel">
+  @if (selectedNode()) {
+    <div class="content-header">
+      <span class="node-icon">{{ selectedNode()!.isRoot ? '🌳' : '🍃' }}</span>
+      <h2>{{ selectedNode()!.name }}</h2>
+    </div>
+    <div class="content-body">
+      <p>{{ selectedNode()!.content }}</p>
+    </div>
+    <div class="content-meta">
+      <span class="meta-item">ID: {{ selectedNode()!.id }}</span>
+      @if (!selectedNode()!.isRoot && selectedNode()!.parentId !== undefined) {
+        <span class="meta-item">Parent ID: {{ selectedNode()!.parentId }}</span>
+      }
+    </div>
+  } @else {
+    <div class="empty-state">
+      <div class="empty-icon">🍃</div>
+      <p>Select a node from the tree to view its content</p>
+    </div>
+  }
+</div>

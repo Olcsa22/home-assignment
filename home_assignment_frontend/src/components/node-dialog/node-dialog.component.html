@@ -1,0 +1,38 @@
+<div class="dialog-backdrop" (click)="onBackdropClick($event)">
+  <div class="dialog-container">
+    <div class="dialog-header">
+      <h3>{{ title }}</h3>
+      <button class="close-btn" (click)="onCancel()">✕</button>
+    </div>
+    
+    <div class="dialog-body">
+      <div class="form-group">
+        <label for="name">Name *</label>
+        <input 
+          type="text" 
+          id="name" 
+          [value]="name()" 
+          (input)="updateName($event)"
+          placeholder="Enter node name"
+          autofocus>
+      </div>
+      
+      <div class="form-group">
+        <label for="content">Content</label>
+        <textarea 
+          id="content" 
+          [value]="content()" 
+          (input)="updateContent($event)"
+          placeholder="Enter node content"
+          rows="5"></textarea>
+      </div>
+    </div>
+    
+    <div class="dialog-footer">
+      <button class="btn btn-secondary" (click)="onCancel()">Cancel</button>
+      <button class="btn btn-primary" [disabled]="!isValid" (click)="onSave()">
+        {{ data.mode === 'add' ? 'Add Node' : 'Save Changes' }}
+      </button>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,48 @@
+<div class="main-page">
+  @if (error()) {
+    <div class="error-banner">
+      ⚠️ {{ error() }}
+    </div>
+  }
+
+
+  <div class="body">
+    <div class="sidebar">
+      <div class="action-buttons">
+        <button class="btn btn-new" (click)="onNewClick()" [disabled]="isLoading()">
+          <span class="btn-icon">➕</span>
+          <span class="btn-text">{{ newButtonLabel }}</span>
+        </button>
+        <button class="btn btn-edit" (click)="onEditClick()" [disabled]="!canEdit || isLoading()">
+          <span class="btn-icon">✏️</span>
+          <span class="btn-text">Edit</span>
+        </button>
+        <button class="btn btn-delete" (click)="onDeleteClick()" [disabled]="!canDelete || isLoading()">
+          <span class="btn-icon">🗑️</span>
+          <span class="btn-text">Delete</span>
+        </button>
+      </div>
+      <app-tree-panel></app-tree-panel>
+    </div>
+    
+    <div class="content-area">
+      <app-content-panel></app-content-panel>
+    </div>
+  </div>
+</div>
+
+@if (showNodeDialog()) {
+  <app-node-dialog
+    [data]="nodeDialogData()"
+    (save)="onNodeDialogSave($event)"
+    (cancel)="onNodeDialogCancel()">
+  </app-node-dialog>
+}
+
+@if (showDeleteDialog()) {
+  <app-delete-confirm-dialog
+    [nodesToDelete]="nodesToDelete()"
+    (confirm)="onDeleteConfirm()"
+    (cancel)="onDeleteCancel()">
+  </app-delete-confirm-dialog>
+}

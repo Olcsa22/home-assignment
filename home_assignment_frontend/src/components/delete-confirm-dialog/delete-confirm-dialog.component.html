@@ -1,0 +1,38 @@
+<div class="dialog-backdrop" (click)="onBackdropClick($event)">
+  <div class="dialog-container">
+    <div class="dialog-header">
+      <h3>⚠️ Confirm Deletion</h3>
+      <button class="close-btn" (click)="onCancel()">✕</button>
+    </div>
+    
+    <div class="dialog-body">
+      <p class="warning-message">
+        @if (hasChildren) {
+          You are about to delete <strong>{{ nodeCount }} nodes</strong>. This action cannot be undone.
+        } @else {
+          You are about to delete this node. This action cannot be undone.
+        }
+      </p>
+      
+      <div class="nodes-list">
+        <p class="list-title">The following node(s) will be deleted:</p>
+        <ul>
+          @for (node of nodesToDelete; track node.id) {
+            <li>
+              <span class="node-icon">{{ node.isRoot ? '🏠' : '📄' }}</span>
+              <span class="node-name">{{ node.name }}</span>
+              <span class="node-id">(ID: {{ node.id }})</span>
+            </li>
+          }
+        </ul>
+      </div>
+    </div>
+    
+    <div class="dialog-footer">
+      <button class="btn btn-secondary" (click)="onCancel()">Cancel</button>
+      <button class="btn btn-danger" (click)="onConfirm()">
+        Delete {{ nodeCount > 1 ? 'All' : '' }}
+      </button>
+    </div>
+  </div>
+</div>
