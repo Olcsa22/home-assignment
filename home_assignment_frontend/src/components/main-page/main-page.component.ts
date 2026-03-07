@@ -2,10 +2,12 @@ import { Component, inject, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { TreePanelComponent } from '../tree-panel/tree-panel.component';
 import { ContentPanelComponent } from '../content-panel/content-panel.component';
-import { NodeDialogComponent, NodeDialogData, NodeDialogResult } from '../node-dialog/node-dialog.component';
+import { NodeDialogComponent } from '../node-dialog/node-dialog.component';
 import { DeleteConfirmDialogComponent } from '../delete-confirm-dialog/delete-confirm-dialog.component';
 import { TreeService } from '../../services/tree.service';
 import { TreeNodeResponse } from '../../model/tree-node-response';
+import { NodeDialogData } from '../../model/node-dialog-data';
+import { NodeDialogResult } from '../../model/node-dialog-result';
 
 @Component({
   selector: 'app-main-page',

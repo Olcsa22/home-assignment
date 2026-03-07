@@ -2,17 +2,12 @@ import { Component, inject, signal, Output, EventEmitter, Input } from '@angular
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { TreeNodeResponse } from '../../model/tree-node-response';
+import { NodeDialogData } from '../../model/node-dialog-data';
+import { NodeDialogResult } from '../../model/node-dialog-result';
 
-export interface NodeDialogData {
-  mode: 'add' | 'edit';
-  node?: TreeNodeResponse;
-  parentId?: number;
-}
 
-export interface NodeDialogResult {
-  name: string;
-  content: string;
-}
+
+
 
 @Component({
   selector: 'app-node-dialog',
