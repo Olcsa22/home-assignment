@@ -83,7 +83,7 @@ public class TreeNodeControllerTest {
                         .content(requestJson)
                         .contentType(MediaType.APPLICATION_JSON))
                         .andExpect(MockMvcResultMatchers.status().is4xxClientError())
-                        .andExpect(MockMvcResultMatchers.jsonPath("$.content").value(Constants.ValidationConstants.NO_RESERVED_ID_MESSAGE));
+                        .andExpect(MockMvcResultMatchers.content().string(Constants.ValidationConstants.NO_RESERVED_ID_MESSAGE));
 
 
     }
@@ -104,7 +104,7 @@ public class TreeNodeControllerTest {
                         .content(requestJson)
                         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(MockMvcResultMatchers.status().isBadRequest())
-                .andExpect(MockMvcResultMatchers.jsonPath("$.content").value(Constants.ValidationConstants.ID_IS_REQUIRED_MESSAGE));
+                .andExpect(MockMvcResultMatchers.content().string(Constants.ValidationConstants.ID_IS_REQUIRED_MESSAGE));
     }
 
     @Test
@@ -123,7 +123,7 @@ public class TreeNodeControllerTest {
                         .content(requestJson)
                         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(MockMvcResultMatchers.status().isBadRequest())
-                .andExpect(MockMvcResultMatchers.jsonPath("$.content").value(Constants.ValidationConstants.NO_EMPTY_CONTENT_MESSAGE));
+                .andExpect(MockMvcResultMatchers.content().string(Constants.ValidationConstants.NO_EMPTY_CONTENT_MESSAGE));
     }
 
     @Test
@@ -142,7 +142,7 @@ public class TreeNodeControllerTest {
                         .content(requestJson)
                         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(MockMvcResultMatchers.status().isBadRequest())
-                .andExpect(MockMvcResultMatchers.jsonPath("$.content").value(Constants.ValidationConstants.NO_EMPTY_NAME_MESSAGE));
+                .andExpect(MockMvcResultMatchers.content().string(Constants.ValidationConstants.NO_EMPTY_NAME_MESSAGE));
     }
 
     @Test
@@ -163,7 +163,7 @@ public class TreeNodeControllerTest {
                         .content(requestJson)
                         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(MockMvcResultMatchers.status().isBadRequest())
-                .andExpect(MockMvcResultMatchers.jsonPath("$.content").value(Constants.ValidationConstants.NOT_EXISTING_PARENT_MESSAGE));
+                .andExpect(MockMvcResultMatchers.content().string(Constants.ValidationConstants.NOT_EXISTING_PARENT_MESSAGE));
     }
 
     @Test
@@ -189,7 +189,7 @@ public class TreeNodeControllerTest {
     void delete_should_throw_exception() throws Exception {
         mockMvc.perform(MockMvcRequestBuilders.delete("/nodes/delete/1"))
                 .andExpect(MockMvcResultMatchers.status().isBadRequest())
-                .andExpect(MockMvcResultMatchers.jsonPath("$.content").value(Constants.ValidationConstants.NOT_EXISTING_ID_MESSAGE));
+                .andExpect(MockMvcResultMatchers.content().string(Constants.ValidationConstants.NOT_EXISTING_ID_MESSAGE));
     }
 
     @Test
@@ -280,7 +280,7 @@ public class TreeNodeControllerTest {
 
         mockMvc.perform(MockMvcRequestBuilders.post("/nodes/reorganize").content(requestJson).contentType(MediaType.APPLICATION_JSON))
                 .andExpect(MockMvcResultMatchers.status().is4xxClientError())
-                .andExpect(MockMvcResultMatchers.jsonPath("$.content").value(Constants.ValidationConstants.NOT_EXISTING_ID_MESSAGE));
+                .andExpect(MockMvcResultMatchers.content().string(Constants.ValidationConstants.NOT_EXISTING_ID_MESSAGE));
     }
 
     @Test
@@ -301,7 +301,7 @@ public class TreeNodeControllerTest {
 
         mockMvc.perform(MockMvcRequestBuilders.post("/nodes/reorganize").content(requestJson).contentType(MediaType.APPLICATION_JSON))
                 .andExpect(MockMvcResultMatchers.status().is4xxClientError())
-                .andExpect(MockMvcResultMatchers.jsonPath("$.content").value(Constants.ValidationConstants.NOT_EXISTING_PARENT_MESSAGE));
+                .andExpect(MockMvcResultMatchers.content().string(Constants.ValidationConstants.NOT_EXISTING_PARENT_MESSAGE));
     }
 
     @Test
@@ -326,7 +326,7 @@ public class TreeNodeControllerTest {
 
         mockMvc.perform(MockMvcRequestBuilders.get("/nodes/contentById/2"))
                 .andExpect(MockMvcResultMatchers.status().is4xxClientError())
-                .andExpect(MockMvcResultMatchers.jsonPath("$.content").value(Constants.ValidationConstants.NOT_EXISTING_ID_MESSAGE));
+                .andExpect(MockMvcResultMatchers.content().string(Constants.ValidationConstants.NOT_EXISTING_ID_MESSAGE));
     }
 
     @Test
