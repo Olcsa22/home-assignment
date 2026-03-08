@@ -27,7 +27,7 @@ export interface SingleValueResponse {
   providedIn: 'root'
 })
 export class TreeApiService {
-  private readonly baseUrl = 'http://localhost:8080/nodes';
+  private readonly baseUrl = '/api/nodes';
 
   async listTree(): Promise<TreeNodeResponse[]> {
     const response = await fetch(`${this.baseUrl}/listTree`);
